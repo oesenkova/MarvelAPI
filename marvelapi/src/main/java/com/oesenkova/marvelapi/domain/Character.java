@@ -5,7 +5,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.Date;
 
 @Entity
 @Table(name = "characters")
@@ -14,7 +13,7 @@ import java.util.Date;
 @NoArgsConstructor
 public class Character {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
@@ -23,5 +22,5 @@ public class Character {
 
     private String resourceURI;
 
-    private Date modified;
+    private Thumbnail thumbnail;
 }

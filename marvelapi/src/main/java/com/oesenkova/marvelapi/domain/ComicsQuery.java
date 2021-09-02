@@ -10,8 +10,9 @@ import lombok.NoArgsConstructor;
 public class ComicsQuery extends BaseQuery{
     private String title;
     private String titleStartsWith;
-    private int startYear;
-    private int issueNumber;
-    private int characters;
-    private int series;
+
+    public ComicsQuery(int limit, String title) {
+        super(0, limit, "");
+        this.title = title;
+    }
 }

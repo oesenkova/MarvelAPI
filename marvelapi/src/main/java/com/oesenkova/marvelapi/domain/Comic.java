@@ -3,18 +3,15 @@ package com.oesenkova.marvelapi.domain;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.Type;
-import org.json.JSONObject;
 
 import javax.persistence.*;
-import java.util.Date;
 
 @Entity
 @Table(name = "comics")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Comics {
+public class Comic {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -28,8 +25,6 @@ public class Comics {
     private String variantDescription;
 
     private String description;
-
-    private Date modified;
 
     private String isbn;
 
@@ -46,4 +41,6 @@ public class Comics {
     private int pageCount;
 
     private String resourceURI;
+
+    private Thumbnail thumbnail;
 }

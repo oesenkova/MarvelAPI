@@ -1,8 +1,7 @@
 package com.oesenkova.marvelapi.http;
 
+import com.oesenkova.marvelapi.domain.*;
 import com.oesenkova.marvelapi.domain.Character;
-import com.oesenkova.marvelapi.domain.CharacterQuery;
-import com.oesenkova.marvelapi.domain.PageResult;
 import com.oesenkova.marvelapi.service.interfaces.CharacterClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,4 +23,12 @@ public class CharacterClientImpl implements CharacterClient {
         String route = characterRoute + "/" + id;
         return marvelRestClient.get(route, Character.class);
     }
+
+    @Override
+    public PageResult<Comic> getComicsList(int id, ComicsQuery comicsQuery) {
+        String route = characterRoute + "/" + id + "/comics";
+        return marvelRestClient.getPage(route, comicsQuery, Comic.class);
+    }
+
+
 }

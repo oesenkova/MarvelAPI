@@ -1,12 +1,14 @@
 package com.oesenkova.marvelapi.service.interfaces;
 
-
-import com.oesenkova.marvelapi.domain.Comics;
+import com.oesenkova.marvelapi.domain.CharacterQuery;
+import com.oesenkova.marvelapi.domain.Comic;
 import com.oesenkova.marvelapi.domain.ComicsQuery;
 import com.oesenkova.marvelapi.domain.PageResult;
 
 public interface ComicsClient {
-    PageResult<Comics> getComicsList(ComicsQuery comicsQuery);
+    PageResult<Comic> getComicsList(ComicsQuery comicsQuery);
 
-    Comics get(int id);
+    Comic get(int id);
+
+    PageResult<Character> getCharactersList(int id, CharacterQuery characterQuery);
 }

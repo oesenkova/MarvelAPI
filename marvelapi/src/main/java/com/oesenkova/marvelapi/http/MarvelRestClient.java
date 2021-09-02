@@ -4,7 +4,9 @@ import com.oesenkova.marvelapi.DTO.MarvelData;
 import com.oesenkova.marvelapi.DTO.MarvelResponse;
 import com.oesenkova.marvelapi.domain.BaseQuery;
 import com.oesenkova.marvelapi.domain.PageResult;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.core.ResolvableType;
 import org.springframework.http.HttpMethod;
@@ -27,7 +29,8 @@ class MarvelRestClient {
     @Value("${marvelapi.baseurl}")
     private String baseUrl;
 
-    private final RestTemplate restTemplate = new RestTemplate();
+    @Autowired
+    private RestTemplateBuilder restTemplateBuilder;
 
     //Возвращвет искомую сущность
     public <T> T get(String route, Class<T> genericClass) {
@@ -45,6 +48,9 @@ class MarvelRestClient {
     //базовый метод вызова API
     private  <T> MarvelResponse<T> execute(String route, String queryParams, Class<T> genericClass) {
         String url = generateUrl(route, queryParams);
+        RestTemplate restTemplate = restTemplateBuilder
+                .errorHandler(new RestTemplateResponseErrorHandler())
+                .build();
         ResponseEntity<MarvelResponse<T>> response = restTemplate.exchange(
                 url,
                 HttpMethod.GET,
